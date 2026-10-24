@@ -1,0 +1,27 @@
+services:
+  - type: worker
+    name: multistrat-paper-bot
+    runtime: python
+    plan: starter
+    region: frankfurt
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    disk:
+      name: multistrat-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: MODE
+        value: paper
+      - key: DATA_DIR
+        value: /data
+      - key: UNIVERSE_SIZE
+        value: "50"
+      - key: W_CTA
+        value: "0.3"
+      - key: TARGET_VOL
+        value: "0.4"
+      - key: START_CASH
+        value: "1000"
